@@ -1,41 +1,25 @@
 <?php
+
 require_once("connect.php");
 session_start();
-$var_value = $_GET['varname'];
-$userId = $_SESSION['id'];
-$emp = "";
-
-
-$query = "INSERT into joined (user_id, group_id) values ('$userId', '$var_value')";
-$result =  mysqli_query($conn, $query);
-if ($result) {
-}
-
 
 
 ?>
 
-
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="assets/css/style.css">
+    <title>Hiking</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css" integrity="sha384-zCbKRCUGaJDkqS1kPbPd7TveP5iyJE0EjAuZQTgFLD2ylzuqKfdKlfG/eSrtxUkn" crossorigin="anonymous">
+        <link rel="stylesheet" href="assets/css/style.css">
     <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-fQybjgWLrvvRgtW6bFlB7jaZrFsaBXjsOMm/tB9LTS58ONXgqbR9W8oWht/amnpF" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/2.0.2/anime.min.js"></script>
 
-    <title>Enrolled Group</title>
 </head>
-
 <body class="myhome">
-
-
-
 <nav class="navbar navbar-expand-lg navbar-dark bg-transparent">
   <a class="navbar-brand" href="index.php">MIU HIKING</a>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarScroll" aria-controls="navbarScroll" aria-expanded="false" aria-label="Toggle navigation">
@@ -93,45 +77,5 @@ if ($result) {
          
   </div>
 </nav>
-<div class="container">
-        <div class='row myprods'>
-
-<?php 
-
-$getGroups = "SELECT * from joined  WHERE user_id = $userId";
-/*$getGroups="SELECT from groups WHERE groups.id = joined.group_id AND joined.user_id = users.id";*/
-
-$result2 =  mysqli_query($conn, $getGroups);
-if ($result2) {
-    while ($rowData = mysqli_fetch_assoc($result2)) {
-        $selectGroups = "SELECT * from groups where id = $rowData[group_id]";
-        $result3 =  mysqli_query($conn, $selectGroups);
-        if ($selectGroups) {
-            while ($rowData2 = mysqli_fetch_assoc($result3)) {
-                echo "<div style='margin-top: 3%' class='col-lg'>";
-                echo    "<div class='card' style='width: 18rem;'>";
-                echo        "<img src='".$rowData2['groupPhoto'] ." ' class='card-img-top' alt='...'>";
-                echo        "<div class='card-body'>";
-                echo          "<h5 class='card-title'>"  .$rowData2['groupName'] . "</h5>";
-                echo          "<p class='card-text'>Some quick example text to build on the card title and make up the bulk of the card's content.</p>";
-                echo          "<a href='#' class='btn btn-primary'>Item Details</a>";
-                echo          "<a href='#' class='btn btn-primary'>Add to cart</a>";
-                echo        "</div>";
-                echo      "</div>";  
-                echo      "</div>"; 
-            }
-        }
-    }
-}
-else if(!$result2){
-    echo"no data to show";
-}
-?>
-
-        </div>
-</div>
-
-
-</body>
-
+    </body>
 </html>

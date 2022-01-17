@@ -105,7 +105,7 @@ $row=mysqli_fetch_array($result);
       echo          "<h5 class='card-title'>"  .$row['productName'] . "</h5>";
       echo          "<p class='card-text'>Some quick example text to build on the card title and make up the bulk of the card's content.</p>";
       echo          "<a href='#' class='btn btn-primary'>Item Details</a>";
-      echo          "<a href='#' class='btn btn-primary'>Add to cart</a>";
+      echo          "<a href='addProductToCart.php?varname='$row[id]' class='btn btn-primary'>Add to cart</a>";
       echo        "</div>";
       echo      "</div>";  
       echo      "</div>";  

@@ -67,29 +67,21 @@ if(isset($_POST['submit'])){
 <body class="register">
 
 <nav class="navbar navbar-expand-lg navbar-dark bg-transparent">
-  <a class="navbar-brand" href="#">MIU HIKING</a>
+  <a class="navbar-brand" href="index.php">MIU HIKING</a>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarScroll" aria-controls="navbarScroll" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
   <div class="collapse navbar-collapse" id="navbarScroll">
     <ul class="navbar-nav mr-auto my-2 my-lg-0 navbar-nav-scroll" style="max-height: 100px;">
-      <li class="nav-item active">
-        <a class="nav-link" href="index.php">Home <span class="sr-only">(current)</span></a>
+     
+      <li class="nav-item">
+        <a class="nav-link active" href="products.php">Products</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="products.php">Products</a>
+        <a class="nav-link active" href="login.php">Login</a>
       </li>
-      <li class="nav-item dropdown">
-        <a class="nav-link dropdown-toggle" href="#" id="navbarScrollingDropdown" role="button" data-toggle="dropdown" aria-expanded="false">
-          More
-        </a>
-        <ul class="dropdown-menu" aria-labelledby="navbarScrollingDropdown">
-          <li><a class="dropdown-item" href="login.php">Login</a></li>
-          <li><a class="dropdown-item" href="register.php">Register</a></li>
-          <li><hr class="dropdown-divider"></li>
-          <li><a class="dropdown-item" href="contactus.php">Contact Us</a></li>
-        </ul>
-      </li>
+</ul>
+
          
   </div>
 </nav>

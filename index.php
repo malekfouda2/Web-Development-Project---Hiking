@@ -2,177 +2,302 @@
 
 require_once("connect.php");
 session_start();
-
+$query = "SELECT * from groups";
+$result = mysqli_query($conn, $query);
+$row = mysqli_fetch_array($result);
 
 ?>
 
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Hiking</title>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css" integrity="sha384-zCbKRCUGaJDkqS1kPbPd7TveP5iyJE0EjAuZQTgFLD2ylzuqKfdKlfG/eSrtxUkn" crossorigin="anonymous">
-        <link rel="stylesheet" href="assets/css/style.css">
-    <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-fQybjgWLrvvRgtW6bFlB7jaZrFsaBXjsOMm/tB9LTS58ONXgqbR9W8oWht/amnpF" crossorigin="anonymous"></script>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Hiking</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css" integrity="sha384-zCbKRCUGaJDkqS1kPbPd7TveP5iyJE0EjAuZQTgFLD2ylzuqKfdKlfG/eSrtxUkn" crossorigin="anonymous">
+  <link rel="stylesheet" href="assets/css/style.css">
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-fQybjgWLrvvRgtW6bFlB7jaZrFsaBXjsOMm/tB9LTS58ONXgqbR9W8oWht/amnpF" crossorigin="anonymous"></script>
+  <style>
+    .card-container {
+      -webkit-perspective: 500px;
+      perspective: 500px;
+    }
 
+    .card-container:hover .card {
+      -webkit-transform: rotateY(180deg);
+      transform: rotateY(180deg);
+    }
+
+    .card {
+      -webkit-transition: -webkit-transform 0.7s;
+      transition: transform 0.7s;
+      -webkit-transform-style: preserve-3d;
+      transform-style: preserve-3d;
+    }
+
+    .front,
+    .back {
+      -webkit-backface-visibility: hidden;
+      backface-visibility: hidden;
+    }
+
+    .back {
+      -webkit-transform: rotateY(180deg);
+      transform: rotateY(180deg);
+    }
+
+    /*Custom Styles*/
+    .cards-container {
+      display: -webkit-flex;
+      display: -webkit-box;
+      display: -ms-flexbox;
+      display: flex;
+      -webkit-flex-direction: row;
+      -webkit-box-orient: horizontal;
+      -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+      flex-direction: row;
+      -webkit-box-pack: center;
+      -webkit-justify-content: center;
+      -ms-flex-pack: center;
+      justify-content: center;
+    }
+
+    .card {
+      width: 300px;
+      height: 150px;
+      margin: 10px;
+    }
+
+    .front,
+    .back {
+      box-shadow: 0 1px 6px 0;
+      position: absolute;
+      width: 100%;
+      top: 0;
+      bottom: 0;
+    }
+
+    img {
+      display: block;
+    }
+
+    .list--centre-justify {
+      display: grid;
+      place-items: center;
+    }
+
+    .contents-centre-justify {
+      text-align: center;
+    }
+
+    .list--no-marker {
+      list-style-type: none;
+    }
+  </style>
 </head>
+
 <body class="myhome">
-   
-<nav class="navbar navbar-expand-lg navbar-dark bg-transparent">
-  <a class="navbar-brand" href="index.php">MIU HIKING</a>
-  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarScroll" aria-controls="navbarScroll" aria-expanded="false" aria-label="Toggle navigation">
-    <span class="navbar-toggler-icon"></span>
-  </button>
-  <div class="collapse navbar-collapse" id="navbarScroll">
-    <ul class="navbar-nav mr-auto my-2 my-lg-0 navbar-nav-scroll" style="max-height: 100px;">
-      
-     
 
-      <?php
+  <nav class="navbar navbar-expand-lg navbar-dark bg-transparent">
+    <a class="navbar-brand" href="index.php">MIU HIKING</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarScroll" aria-controls="navbarScroll" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarScroll">
+      <ul class="navbar-nav mr-auto my-2 my-lg-0 navbar-nav-scroll" style="max-height: 100px;">
 
-      if(!isset( $_SESSION['id']))
-      {
-        echo ' <li class="nav-item active">
+
+
+        <?php
+
+        if (!isset($_SESSION['id'])) {
+          echo ' <li class="nav-item active">
         <a class="nav-link" href="login.php">Login <span class="sr-only">(current)</span></a>
       </li>';
-      }
-      else if(isset($_SESSION['id']))
-      {
-        echo ' <li class="nav-item active">
+        } else if (isset($_SESSION['id'])) {
+          echo ' <li class="nav-item active">
         <a class="nav-link" href="profile.php">Profile <span class="sr-only">(current)</span></a>
       </li>';
+        }
 
-        
-      }
-
-       if(isset($_SESSION['id']))
-      {
-        echo ' <li class="nav-item active">
+        if (isset($_SESSION['id'])) {
+          echo ' <li class="nav-item active">
         <a class="nav-link" href="signout.php">Logout <span class="sr-only">(current)</span></a>
       </li>';
-      }
-      
-      if(isset($_SESSION['id']))
-      {
-        echo ' <li class="nav-item active">
-        <a class="nav-link" href="login.php">Cart <span class="sr-only">(current)</span></a>
+        }
+
+        if (isset($_SESSION['id'])) {
+          echo ' <li class="nav-item active">
+        <a class="nav-link" href="cart.php">Cart <span class="sr-only">(current)</span></a>
       </li>';
-      }
-      if(isset($_SESSION['id']))
-      {
-        echo ' <li class="nav-item active">
+        }
+        if (isset($_SESSION['id'])) {
+          echo ' <li class="nav-item active">
         <a class="nav-link" href="contactus.php">Contact Us <span class="sr-only">(current)</span></a>
       </li>';
-      }
+        }
 
 
-     
-
-?>
- <li class="nav-item active">
-        <a class="nav-link" href="products.php">Products</a>
-      </li>
-         
-  </div>
-</nav>
 
 
-<div class="mymargins">
+        ?>
+        <li class="nav-item active">
+          <a class="nav-link" href="products.php">Products</a>
+        </li>
 
-  <div class="row">
-    <div class="col-lg-8">
-       <div class="intro">
-           <h2 class="introtext">Welcome to MIU Hiking, where every trip is different.</h2>
-           <h6>Register to view all the availaible groups and join with the one you feel fits you the most</h6>
-           <div class="mybttns">
-           <button type="button" class="btn btn-primary cta" onclick="location.href='register.php'">Join Us Now</button>
-           <button type="button" class="btn btn-primary groupsbttn" onclick="location.href='groups.php'">View all Groups</button>
-           </div>
-
-       </div>
     </div>
-    <div class="col-lg-4">
-    <div class="group">
-    <img class="myimg" src="assets/img/c1.jpg">     
-    </div>
-  </div>    
-  </div>
-  </div>
+  </nav>
+
 
   <div class="mymargins">
-      <div class="row">
-          <div class="col-lg-4">
-<img class="myimg" src="assets/img/c1.jpg">
+
+    <div class="row">
+      <div class="col-lg-6">
+        <div class="intro">
+          <h2 class="introtext">Welcome to MIU Hiking, where every trip is different.</h2>
+          <h6>Register to view all the availaible groups and join with the one you feel fits you the most</h6>
+          <div class="mybttns">
+            <?php
+            if (!isset($_SESSION['id'])) {
+              echo '<a class="nav-link btn btn-primary cta" href="register.php">Join Us Now <span class="sr-only">(current)</span></a>';
+            }
+            ?>
+            <div>
+              <?php
+              if (isset($_SESSION['id'])) {
+                echo "<h1 class='ml2'> Welcome " . $_SESSION['name'] . "</h1>";
+              }
+              ?>
+              <br>
+            </div>
+            <button type="button" class="btn btn-primary groupsbttn" onclick="location.href='groups.php'">View all Groups</button>
           </div>
-          <div class="col-lg-4">
-          <img  class="myimg" src="assets/img/c1.jpg">
 
-              </div>
-              <div class="col-lg-4">
-              <img  class="myimg" src="assets/img/c1.jpg">
-
-              </div>
+        </div>
       </div>
+      <div class="col-lg-6">
+        <div class="group">
+          <img style="width: 100%" class="myimg" src="assets/img/illustration.svg" alt="My Happy SVG">
+        </div>
+      </div>
+    </div>
   </div>
 
-  <div class="mymargins2">
-      <div class="row">
-          <div class="col-lg-4">
-<img class="myimg" src="assets/img/c1.jpg">
-          </div>
-          <div class="col-lg-4">
-          <img  class="myimg" src="assets/img/c1.jpg">
 
-              </div>
-              <div class="col-lg-4">
-              <img  class="myimg" src="assets/img/c1.jpg">
-
-              </div>
-      </div>
+  <div class="cards-container">
+    <div class="row">
+      <!--   First Card -->
+      <?php
+      $result->data_seek(0);
+      while ($row = $result->fetch_assoc()) {
+        echo '<div class="card-container">';
+        echo '<div class="card">';
+        echo '<div class="front">';
+        echo '<img style="width:100%" src="' . $row['groupPhoto'] . '">';
+        echo '</div>';
+        echo '<div class="back">';
+        echo '<h1 style="color:black">"' . $row['groupName'] . '"</h1>';
+        echo  '</div>';
+        echo '</div>';
+        echo '</div>';
+      }
+      ?>
+    </div>
   </div>
-
+<br>
   <div class="aboutus">
+    <center>
+      <h2>Meet some of our sponsors</h2>
+    </center>
+
+
+    <div class="container">
+      <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
+        <div class="carousel-inner">
+          <div class="carousel-item active">
+            <img src="assets/img/redbull.jpg" class="d-block w-100" alt="...">
+          </div>
+          <div class="carousel-item">
+            <img src="assets/img/spons1.png" class="d-block w-100" alt="...">
+          </div>
+          <div class="carousel-item">
+            <img src="assets/img/spons1.png" class="d-block w-100" alt="...">
+          </div>
+        </div>
+        <button class="carousel-control-prev" type="button" data-target="#carouselExampleControls" data-slide="prev">
+          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+          <span class="sr-only">Previous</span>
+        </button>
+        <button class="carousel-control-next" type="button" data-target="#carouselExampleControls" data-slide="next">
+          <span class="carousel-control-next-icon" aria-hidden="true"></span>
+          <span class="sr-only">Next</span>
+        </button>
+      </div>
+    </div>
+
+    
+    <section>
       <center>
-<h1>Meet some of our sponsors</h1>
-</center>
+        <h2>Hiking Tips</h2>
 
 
-<div class="container">
-<div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
-  <div class="carousel-inner">
-    <div class="carousel-item active">
-      <img src="assets/img/spons1.png" class="d-block w-100" alt="...">
+        <img src="assets/img/c1.jpg" alt="">
+      </center>
+      <div class="list--centre-justify">
+        <ul>
+          <li>
+            Make sure to choose the right trail for your fitness level
+          </li>
+          <li>
+            Check the weather few hours before you head for hiking
+          </li>
+          <li>
+            Once you have selected a trail, familiarize yourself with the route
+          </li>
+          <li>
+            Don’t forget to pack necessary items like sun protection, repair kit, extra food and water
+          </li>
+        </ul>
+      </div>
+    </section>
+    <div class="footer">
+<br>
     </div>
-    <div class="carousel-item">
-      <img src="assets/img/spons1.png" class="d-block w-100" alt="...">
-    </div>
-    <div class="carousel-item">
-      <img src="assets/img/spons1.png" class="d-block w-100" alt="...">
-    </div>
-  </div>
- <button class="carousel-control-prev" type="button" data-target="#carouselExampleControls" data-slide="prev">
-    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-    <span class="sr-only">Previous</span>
-  </button>
-  <button class="carousel-control-next" type="button" data-target="#carouselExampleControls" data-slide="next">
-    <span class="carousel-control-next-icon" aria-hidden="true"></span>
-    <span class="sr-only">Next</span>
-  </button>
-</div>
-</div>
+    <center>
 
+      <div>
+        <center>
+          <h4 class="aboutus2">About Us</h1>
+        </center>
+      </div>
+    </center>
+    <script>
+    var textWrapper = document.querySelector('.ml2');
+textWrapper.innerHTML = textWrapper.textContent.replace(/\S/g, "<span class='letter'>$&</span>");
 
+anime.timeline({loop: true})
+  .add({
+    targets: '.ml2 .letter',
+    scale: [4,1],
+    opacity: [0,1],
+    translateZ: 0,
+    easing: "easeOutExpo",
+    duration: 950,
+    delay: (el, i) => 70*i
+  }).add({
+    targets: '.ml2',
+    opacity: 0,
+    duration: 1000,
+    easing: "easeOutExpo",
+    delay: 1000
+  });
+    </script>
 
-  <div class="footer">
-
-  </div>
-  <div>
-    <h4 class="aboutus2">About Us</h1>
-  </div>
-  
 
 </body>
+
 </html>

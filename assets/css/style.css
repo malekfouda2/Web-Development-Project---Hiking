@@ -80,7 +80,6 @@ h1{
      background-color: transparent;
      border: 2px #d59f38 solid ;
      width: 20%;
-     margin-left: 2%;
  }
 
  .groupsbttn:hover{
@@ -125,6 +124,6 @@ h1{
      border-radius: 50%;
  }
  .aboutus2{
-     text-align: left;
  }
+ 
  
