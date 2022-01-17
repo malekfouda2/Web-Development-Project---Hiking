@@ -100,7 +100,7 @@ $row = mysqli_fetch_array($result);
   </style>
 </head>
 
-<body class="myhome">
+<body class="myhome" style="    background-image: url('assets/img/home2.svg'); height: 100%;background-position: center;background-repeat: no-repeat;background-size: cover;">
 
   <nav class="navbar navbar-expand-lg navbar-dark bg-transparent">
     <a class="navbar-brand" href="index.php">MIU HIKING</a>
@@ -209,23 +209,30 @@ $row = mysqli_fetch_array($result);
     </div>
   </div>
 <br>
-  <div class="aboutus">
-    <center>
-      <h2>Meet some of our sponsors</h2>
-    </center>
-
+  
 
     <div class="container">
+      <br>
+   
       <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
-        <div class="carousel-inner">
+      <div class="aboutus">
+      <br>
+    <center>
+      <br>
+    <span class="ml2" style='font-weight: bold; color: black; margin-bottom: 0% !important;'>Meet some of our sponsors</span>
+    </center>
+        <div class="carousel-inner" style="margin-top: 0% !important;">
           <div class="carousel-item active">
-            <img src="assets/img/redbull.jpg" class="d-block w-100" alt="...">
+            <img src="assets/img/spons4.svg" class="d-block w-100" alt="...">
           </div>
           <div class="carousel-item">
-            <img src="assets/img/spons1.png" class="d-block w-100" alt="...">
+            <img src="assets/img/spons2.svg" class="d-block w-100" alt="...">
           </div>
           <div class="carousel-item">
-            <img src="assets/img/spons1.png" class="d-block w-100" alt="...">
+            <img src="assets/img/spons3.svg" class="d-block w-100" alt="...">
+          </div>
+          <div class="carousel-item">
+            <img src="assets/img/spons5.svg" class="d-block w-100" alt="...">
           </div>
         </div>
         <button class="carousel-control-prev" type="button" data-target="#carouselExampleControls" data-slide="prev">
@@ -245,7 +252,7 @@ $row = mysqli_fetch_array($result);
         <h2>Hiking Tips</h2>
 
 
-        <img src="assets/img/c1.jpg" alt="">
+        <img src="assets/img/tips.jpg" style="width: 50%; height: 50%">
       </center>
       <div class="list--centre-justify">
         <ul>
@@ -268,11 +275,31 @@ $row = mysqli_fetch_array($result);
 <br>
     </div>
     <center>
+<div class="row" style="background-image: url('assets/img/background.jpg');">
 
-      <div>
+
+      <div style="height: 100%; width: 100%">
         <center>
-          <h4 class="aboutus2">About Us</h1>
+          <h4 class="about">About Us</h1>
+         
+          <br>
+          <p class="about">
+          Founded in 2011, TravelTriangle is India’s leading online holiday marketplace bringing both the travelers, and trusted & expert travel agents on a common platform. With the recent Series C funding of $12 Million from Nandan Nilekani and Sanjeev Aggarwal backed Fundamentum in early 2018, it is on its way of encompassing all the components of holiday eco-system through its highly innovative and technology-focused product. Besides, having already raised close to a cumulative funding of $20 Million from SAIF Partners, Bessemer Venture Partners and RB Investments put together, the company has already achieved operating profitability, and on track to become EBITDA profitable by next year.
+
+20 Lakh+
+Travelers monthly visiting us
+
+650+
+Network of expert travel agents
+
+65+
+Destinations served worldwide
+
+97%
+Positive quotient by travelers
+          </p>
         </center>
+      </div>
       </div>
     </center>
     <script>

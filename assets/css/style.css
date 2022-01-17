@@ -88,6 +88,7 @@ h1{
 
  .myhome{
     background-color: #000139;
+    height: 100%;
     color: #fff;
  }
 
@@ -125,5 +126,13 @@ h1{
  }
  .aboutus2{
  }
+ .myhome2{
+    background-image: url('assets/img/home1.svg');
+    height: 100%;
+    
+}
+.about{
+    color: #000;
+}
  
  
