@@ -181,13 +181,19 @@ $row = mysqli_fetch_array($result);
       </div>
       <div class="col-lg-6">
         <div class="group">
-          <img style="width: 100%" class="myimg" src="assets/img/illustration.svg" alt="My Happy SVG">
+          <img style="width: 100%" class="myimg" src="assets/img/illustration.svg" >
         </div>
       </div>
     </div>
   </div>
 
 
+  <center>
+    <div>
+      <h1 class="ml2" style="color: black; "><mark>Here are some of our Hiking Groups:</mark></h1>
+    </div>
+  </center>
+  <br>
   <div class="cards-container">
     <div class="row">
       <!--   First Card -->
@@ -197,10 +203,10 @@ $row = mysqli_fetch_array($result);
         echo '<div class="card-container">';
         echo '<div class="card">';
         echo '<div class="front">';
-        echo '<img style="width:100%" src="' . $row['groupPhoto'] . '">';
+        echo '<img style="width:100%; height: 100%" src="' . $row['groupPhoto'] . '">';
         echo '</div>';
         echo '<div class="back">';
-        echo '<h1 style="color:black">"' . $row['groupName'] . '"</h1>';
+        echo '<h1 style="color:black; font-weight: 400; ">"' . $row['groupName'] . '"</h1>';
         echo  '</div>';
         echo '</div>';
         echo '</div>';
@@ -219,7 +225,7 @@ $row = mysqli_fetch_array($result);
       <br>
     <center>
       <br>
-    <span class="ml2" style='font-weight: bold; color: black; margin-bottom: 0% !important;'>Meet some of our sponsors</span>
+    <h1 class="ml2" style="color: black; "><mark>Meet some of our sponsors</mark></h1>
     </center>
         <div class="carousel-inner" style="margin-top: 0% !important;">
           <div class="carousel-item active">

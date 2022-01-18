@@ -3,13 +3,15 @@ require_once("connect.php");
 session_start();
 $var_value = $_GET['varname'];
 $userId = $_SESSION['id'];
-$emp = "";
 
 
-$query = "INSERT into joinedProducts (productID, userID) values ( '$var_value','$userId')";
+$query = "INSERT into cart (userID, productID) values ( '$userId','$var_value')";
 $result =  mysqli_query($conn, $query);
 if ($result) {
     echo"helw";
+}
+else{
+    echo "something went wrong";
 }
 
 
@@ -24,6 +26,6 @@ if ($result) {
     <title>Add to cart</title>
 </head>
 <body>
-    
+
 </body>
 </html>

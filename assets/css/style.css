@@ -108,6 +108,7 @@ h1{
 
  .card-text{
      color: #000 !important;
+     font:20px;
  }
 
  .card-title{
@@ -124,9 +125,7 @@ h1{
      margin: auto;
      border-radius: 50%;
  }
- .aboutus2{
- }
- .myhome2{
+ me2{
     background-image: url('assets/img/home1.svg');
     height: 100%;
     

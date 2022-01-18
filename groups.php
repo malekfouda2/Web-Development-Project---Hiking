@@ -13,7 +13,7 @@ $row=mysqli_fetch_array($result);
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Products</title>
+    <title>Groups</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css" integrity="sha384-zCbKRCUGaJDkqS1kPbPd7TveP5iyJE0EjAuZQTgFLD2ylzuqKfdKlfG/eSrtxUkn" crossorigin="anonymous">
     <link rel="stylesheet" href="assets/css/style.css">
 <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
@@ -66,7 +66,7 @@ $row=mysqli_fetch_array($result);
       echo        "<div class='card-body'>";
       echo          "<h5 class='card-title'>"  .$row['groupName'] . "</h5>";
       echo          "<p class='card-text'>".$row['groupDesc'] ."</p>";
-      echo          "<a href='admin-edit-groups/".$row['id']."' class='btn btn-primary'>Group Details</a>";
+     
       echo          "<a  href='enrollInGroup.php?varname=$row[id]' class='btn btn-primary'>Join Group</a>";
       echo        "</div>";
       echo      "</div>";  

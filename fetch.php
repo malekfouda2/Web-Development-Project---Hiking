@@ -5,58 +5,48 @@
 
 
 <?php
+session_start();
 require_once("connect.php");
-$output='';
-
-if(isset($_POST['txt'])){
-
-$txt=$_POST['txt'];
-
-$sql="SELECT * FROM products WHERE productName LIKE '{$txt}%' ";
-$result=mysqli_query($connect,$sql);
-
-if(mysqli_num_rows($result)>0){
-
-$output .= '<h4 align="center">Search Result</h4>';
-$output .= '<div class="table.responsive">
-             <table class="table table bordered">
-             <thead>      
-             <tr>
-             <th>ID</th>
-             <th>ProductName</th>
-             <th>ProductDesc</th>
-             <th>ProductPrice</th>
-             <th>ProductPhoto</th>
-             </tr>
-             </thead>';
-             while($row=mysqli_fetch_array($result))
-             {
-              $output .= '
-                   <tr>
-                   <td>'.$row["id"].'</td>
-                   <td>'.$row["productName"].'</td>
-                   <td>'.$row["productDesc"].'</td>
-                   <td>'.$row["productPrice"].'</td>
-                   <td>'.$row["productPhoto"].'</td>
-
-                    </tr>
-                               ';
-
-             }
-             echo $output;
-
-
-
+if(isset($_POST["query"]))
+{
+ $search = mysqli_real_escape_string($conn, $_POST["query"]);
+ $query = "
+  SELECT * FROM products 
+  WHERE productName LIKE '%".$search."%'
+  
+ ";
 }
-else{
-  echo 'product not found';
+else
+{
+ $query = "
+  SELECT * FROM products ORDER BY id
+ ";
 }
+$result = mysqli_query($conn, $query);
+if(mysqli_num_rows($result) > 0)
+{
+echo "<div class='row myprods'>";
+$result->data_seek(0);
+     while ($row = $result->fetch_assoc()) {
+      $imageURL = 'images/'.$row["productPhoto"];
+      echo "<div style='margin-top: 3%' class='col-lg'>";
+      echo    "<div class='card' style='width: 18rem;'>";
+      echo        "<img src='".$imageURL ." ' class='card-img-top' alt='...'>";
+      echo        "<div class='card-body'>";
+      echo          "<h5 class='card-title'>"  .$row['productName'] . "</h5>";
+      echo          "<p class='card-text'>".$row['productPrice']."</p>";
+    
+      echo          "<a href='addProductToCart.php' class='btn btn-primary'>Add to cart</a>";
+      echo        "</div>";
+      echo      "</div>";  
+      echo      "</div>";  
+        }
+        echo "</div>";
+ 
 }
-
-
-
-
-
-
+else
+{
+ echo 'Data Not Found';
+}
 
   ?>

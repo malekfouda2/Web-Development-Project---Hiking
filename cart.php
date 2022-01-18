@@ -3,6 +3,7 @@
 require_once("connect.php");
 session_start();
 
+$userId = $_SESSION['id'];
 
 ?>
 
@@ -77,5 +78,36 @@ session_start();
          
   </div>
 </nav>
+<div class="container">
+        <div class='row myprods'>
+
+<?php 
+
+$getProducts = "SELECT * from cart  WHERE userID = $userId";
+/*$getGroups="SELECT from groups WHERE groups.id = joined.group_id AND joined.user_id = users.id";*/
+
+$result2 =  mysqli_query($conn, $getProducts);
+if ($result2) {
+    while ($rowData = mysqli_fetch_assoc($result2)) {
+        $selectProducts = "SELECT * from products where id = $rowData[productID]";
+        $result3 =  mysqli_query($conn, $selectProducts);
+        if ($selectProducts) {
+            while ($rowData2 = mysqli_fetch_assoc($result3)) {
+                echo "<div style='margin-top: 3%' class='col-lg'>";
+                echo    "<div class='card' style='width: 18rem;'>";
+                echo        "<img src='".$rowData2['productPhoto'] ." ' class='card-img-top' alt='...'>";
+                echo        "<div class='card-body'>";
+                echo          "<h5 class='card-title'>"  .$rowData2['productName'] . "</h5>";
+                echo          "<p class='card-text'>Some quick example text to build on the card title and make up the bulk of the card's content.</p>";
+                echo          "<a href='#' class='btn btn-primary'>Item Details</a>";
+                echo          "<a href='#' class='btn btn-primary'>Add to cart</a>";
+                echo        "</div>";
+                echo      "</div>";  
+                echo      "</div>"; 
+            }
+        }
+    }
+}
+?>
     </body>
 </html>
