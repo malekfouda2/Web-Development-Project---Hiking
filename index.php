@@ -140,6 +140,11 @@ $row = mysqli_fetch_array($result);
         <a class="nav-link" href="contactus.php">Contact Us <span class="sr-only">(current)</span></a>
       </li>';
         }
+        if (isset($_SESSION['id'])) {
+          echo ' <li class="nav-item active">
+        <a class="nav-link" href="Live CHat.php"> Live Chat <span class="sr-only">(current)</span></a>
+      </li>';
+        }
 
 
 
